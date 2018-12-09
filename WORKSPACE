@@ -41,6 +41,11 @@ local_repository(
 
 load("//:defs.bzl", "node_repositories", "npm_install", "yarn_install")
 
+local_repository(
+    name = "somedir",
+    path = "somedir",
+)
+
 # Install a hermetic version of node.
 # After this is run, these labels will be available:
 # - NodeJS:
@@ -58,6 +63,8 @@ node_repositories(
         "//internal/npm_install/test:package.json",
     ],
     preserve_symlinks = True,
+    vendored_node = "@somedir",
+    vendored_yarn = "@somedir",
 )
 
 # Now the user must run either
